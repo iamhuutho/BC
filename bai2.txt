@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract CitizenIdentityCard {
+    struct Name {
+        string firstName;
+        string lastName;
+    }
+
+    struct BirthDate {
+        uint8 day;
+        uint8 month;
+        uint16 year;
+    }
+
+    struct Address {
+        string streetNumber;
+        string district;
+        string city;
+        string province;
+    }
+
+    struct Citizen {
+        string numberId;
+        Name fullName;
+        BirthDate birthDate;
+        bool sex;
+        string nationality;
+        Address hometown;
+        Address homeAddress;
+        string personalIdentification;
+    }
+
+    mapping(address => Citizen) public citizens;
+
+    // Function to add a new citizen
+    function addCitizen(
+        string memory _numberId,
+        Name memory _fullName,
+        BirthDate memory _birthDate,
+        bool _sex,
+        string memory _nationality,
+        Address memory _hometown,
+        Address memory _homeAddress,
+        string memory _personalIdentification
+    ) public {
+        citizens[msg.sender] = Citizen(
+            _numberId,
+            _fullName,
+            _birthDate,
+            _sex,
+            _nationality,
+            _hometown,
+            _homeAddress,
+            _personalIdentification
+        );
+    }
+}
